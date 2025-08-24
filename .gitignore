@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Varia
+figures.zip
+
 # C extensions
 *.so
 

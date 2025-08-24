@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" onload="init(evt)" onmousemove="mouse_move(evt)" onmouseout="mouse_out(evt)" height="433" width="1215">
+ <script type="text/ecmascript">
+      var doc = null;
+      var root = null;
+      var css = null;
+      var last_target = null;
+      var svgNs = "http://www.w3.org/2000/svg";
+
+      function init(event) {
+         doc = event.target.ownerDocument;
+         root = doc.documentElement;
+         if (root.styleSheets != null &amp;&amp; root.styleSheets[0] != null) css = root.styleSheets[0]
+         else if (doc.styleSheets != null &amp;&amp; doc.styleSheets[0] != null) css = doc.styleSheets[0];
+         top.zoomSVG = zoom;
+         if (top.svg_loaded) top.svg_loaded(doc);
+         if (top.setSVGTitle) top.setSVGTitle(get_title());
+         if (top.setSVGDesc) top.setSVGDesc(get_desc());
+         if (top.highlightSVGNodes) top.highlightSVGNodes(css);
+      }
+      function mouse_out (event) {
+        hide_tooltip(event);
+      }
+      function mouse_move (event) {
+         show_tooltip(event);
+      }
+      function get_title () {
+        var title = root.getElementsByTagName('title').item(0);
+        if (title &amp;&amp; title.parentNode == root) {
+           return title.firstChild.nodeValue;
+        } else {
+           return '';
+        }
+      }
+      function get_desc () {
+        var desc = root.getElementsByTagName('desc').item(0);
+        if (desc &amp;&amp; desc.parentNode == root) {
+           var n = desc.firstChild;
+           while (n &amp;&amp; n.nodeType != 1) n=n.nextSibling;
+           if (!n) n=desc.firstChild;
+           return n; // desc.firstChild.nodeValue;
+        } else {
+           return '';
+        }
+      }
+      function zoom (amount) {
+        var old_scale = root.currentScale;
+        var new_scale = old_scale + amount;
+        var rescale = new_scale/old_scale;
+        root.currentScale = new_scale;
+        root.setAttribute('width',Number(root.getAttribute('width'))*rescale);
+        root.setAttribute('height',Number(root.getAttribute('height'))*rescale);
+      }
+      function hide_tooltip(event) {
+         if (event.target == last_target &amp;&amp; top.changeToolTip) {
+            top.changeToolTip("");
+         }
+      }
+      function show_tooltip(event) {
+        var target = event.target;
+        if (!top.placeTip) return;
+        var x = event.clientX;
+        var y = event.clientY;
+        top.placeTip(x,y,root,event);
+        if ( last_target != target ) {
+          last_target = target;
+          if (top.onSVGMouseOver) top.onSVGMouseOver(target);
+          if (target==root) return;
+          var desc;
+          for (var i=0; i&lt;target.childNodes.length; i++) {
+            var n = target.childNodes[i];
+            if (n.nodeName == 'desc') {
+              desc = n;
+              break;
+            }
+          }
+          if ( desc ) {
+            tooltip_text = desc.firstChild.nodeValue;
+            if (tooltip_text == null) {
+              top.changeToolTip('');
+            } else {
+              top.changeToolTip(tooltip_text.split(/\n/).join("&lt;br /&gt;"));
+            }
+          }
+        }
+      }
+
+</script>
+ <defs>
+  <style type="text/css"></style>
+ </defs>
+ <g transform="translate(5 5)">
+  <path id="i4" d="M38,159 L582,87" fill="none" stroke-linejoin="round" stroke-linecap="butt" stroke="#bebebe" stroke-width="2" stroke-dasharray="none" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i14" d="M48,303 L290,231" fill="none" stroke-dasharray="none" stroke-width="2" stroke="#bebebe" stroke-linecap="butt" stroke-linejoin="round" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i22" d="M118,303 L290,231" fill="none" stroke-linejoin="round" stroke-linecap="butt" stroke="#bebebe" stroke-width="2" stroke-dasharray="none" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i32" d="M188,303 L290,231" fill="none" stroke="#bebebe" stroke-dasharray="none" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i42" d="M280,303 L290,231" fill="none" stroke-width="2" stroke-dasharray="none" stroke="#bebebe" stroke-linejoin="round" stroke-linecap="butt" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i52" d="M290,231 L38,159" fill="none" stroke-linecap="butt" stroke-linejoin="round" stroke="#bebebe" stroke-dasharray="none" stroke-width="2" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i62" d="M392,231 L38,159" fill="none" stroke-dasharray="none" stroke-width="2" stroke="#bebebe" stroke-linecap="butt" stroke-linejoin="round" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i70" d="M402,159 L582,87" fill="none" stroke-linejoin="round" stroke-linecap="butt" stroke="#bebebe" stroke-width="2" stroke-dasharray="none" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i80" d="M477,159 L582,87" fill="none" stroke-dasharray="none" stroke-width="2" stroke="#bebebe" stroke-linecap="butt" stroke-linejoin="round" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i90" d="M572,159 L582,87" fill="none" stroke-linejoin="round" stroke-linecap="butt" stroke-width="2" stroke-dasharray="none" stroke="#bebebe" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i100" d="M582,87 L28,15" fill="none" stroke-width="2" stroke-dasharray="none" stroke="#bebebe" stroke-linejoin="round" stroke-linecap="butt" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i110" d="M592,375 L602,303" fill="none" stroke-linejoin="round" stroke-linecap="butt" stroke="#bebebe" stroke-width="2" stroke-dasharray="none" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i120" d="M602,303 L612,231" fill="none" stroke="#bebebe" stroke-dasharray="none" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i130" d="M612,231 L572,159" fill="none" stroke-linejoin="round" stroke-linecap="butt" stroke-width="2" stroke-dasharray="none" stroke="#bebebe" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i140" d="M661,159 L582,87" fill="none" stroke-width="2" stroke-dasharray="none" stroke="#bebebe" stroke-linejoin="round" stroke-linecap="butt" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i150" d="M700,303 L710,231" fill="none" stroke-linejoin="round" stroke-linecap="butt" stroke-width="2" stroke-dasharray="none" stroke="#bebebe" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i160" d="M710,231 L661,159" fill="none" stroke-linejoin="round" stroke-linecap="butt" stroke="#bebebe" stroke-width="2" stroke-dasharray="none" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i170" d="M828,303 L1098,231" fill="none" stroke="#bebebe" stroke-dasharray="none" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i178" d="M923,303 L1098,231" fill="none" stroke-width="2" stroke-dasharray="none" stroke="#bebebe" stroke-linejoin="round" stroke-linecap="butt" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i186" d="M1018,303 L1098,231" fill="none" stroke="#bebebe" stroke-dasharray="none" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i196" d="M1088,303 L1098,231" fill="none" stroke-width="2" stroke-dasharray="none" stroke="#bebebe" stroke-linejoin="round" stroke-linecap="butt" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i206" d="M1098,231 L661,159" fill="none" stroke="#bebebe" stroke-dasharray="none" stroke-width="2" stroke-linecap="butt" stroke-linejoin="round" class="line scale_width scale_arrow seg:0.0"></path>
+  <path id="i216" d="M1108,159 L582,87" fill="none" stroke-linecap="butt" stroke-linejoin="round" stroke="#bebebe" stroke-dasharray="none" stroke-width="2" class="line scale_width scale_arrow seg:0.0"></path>
+  <ellipse id="i1" cx="28.5" cy="15" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i5" cx="38.5" cy="159" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i15" cx="48.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i23" cx="118.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i33" cx="188.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i43" cx="280.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i53" cx="290.5" cy="231" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i63" cx="392.5" cy="231" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i71" cx="402.5" cy="159" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i81" cx="477.5" cy="159" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i91" cx="572.5" cy="159" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i101" cx="582.5" cy="87" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i111" cx="592.5" cy="375" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i121" cx="602.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i131" cx="612.5" cy="231" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i141" cx="661.5" cy="159" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i151" cx="700.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i161" cx="710.5" cy="231" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i171" cx="828.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i179" cx="923.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i187" cx="1018.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i197" cx="1088.5" cy="303" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i207" cx="1098.5" cy="231" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <ellipse id="i217" cx="1108.5" cy="159" rx="3.5" ry="3.5" stroke-width="1" stroke-dasharray="none" stroke="#000000" fill="#ffff00" class="point node seg:0.0"></ellipse>
+  <rect id="i3" x="24" y="27" width="89" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i9" x="34" y="171" width="123" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i13" x="34" y="188" width="107" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i17" x="44" y="315" width="17" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i21" x="44" y="332" width="62" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i27" x="114" y="315" width="48" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i31" x="114" y="332" width="62" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i37" x="184" y="315" width="84" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i41" x="184" y="332" width="53" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i47" x="276" y="315" width="137" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i51" x="276" y="332" width="66" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i57" x="286" y="243" width="94" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i61" x="286" y="260" width="56" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i65" x="388" y="243" width="6" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i69" x="388" y="260" width="87" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i75" x="398" y="171" width="49" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i79" x="398" y="188" width="67" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i85" x="473" y="171" width="50" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i89" x="473" y="188" width="87" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i95" x="568" y="171" width="64" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i99" x="568" y="188" width="81" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i105" x="578" y="99" width="83" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i109" x="578" y="116" width="67" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i115" x="588" y="387" width="123" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i119" x="588" y="404" width="66" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i125" x="598" y="315" width="90" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i129" x="598" y="332" width="66" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i135" x="608" y="243" width="85" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i139" x="608" y="260" width="78" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i145" x="657" y="171" width="122" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i149" x="657" y="188" width="84" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i155" x="696" y="315" width="120" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i159" x="696" y="332" width="88" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i165" x="706" y="243" width="77" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i169" x="706" y="260" width="66" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i173" x="824" y="315" width="6" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i177" x="824" y="332" width="87" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i181" x="919" y="315" width="17" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i185" x="919" y="332" width="87" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i191" x="1014" y="315" width="33" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i195" x="1014" y="332" width="62" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i201" x="1084" y="315" width="91" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i205" x="1084" y="332" width="54" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i211" x="1094" y="243" width="109" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i215" x="1094" y="260" width="68" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i219" x="1104" y="171" width="6" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <rect id="i223" x="1104" y="188" width="87" height="17" stroke-width="0" stroke-dasharray="none" stroke="#ffffff" fill="#ffffff" fill-opacity="0.9" stroke-opacity="0.9" class="textbg seg:0.0"></rect>
+  <text x="25" y="40" id="i2" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">PML-2274111</text>
+  <text x="35" y="184" id="i6" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">Ἀτρεΐδαι</text>
+  <text x="96" y="184" id="i8" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">Ἀτρείδης</text>
+  <text x="35" y="201" id="i10" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">PROPN</text>
+  <text x="84" y="201" id="i12" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">vocative</text>
+  <text x="45" y="328" id="i16" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">τε</text>
+  <text x="45" y="345" id="i18" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">CCONJ</text>
+  <text x="91" y="345" id="i20" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">cc</text>
+  <text x="115" y="328" id="i24" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">καὶ</text>
+  <text x="140" y="328" id="i26" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">καί</text>
+  <text x="115" y="345" id="i28" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">CCONJ</text>
+  <text x="161" y="345" id="i30" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">cc</text>
+  <text x="185" y="328" id="i34" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">ἄλλοι</text>
+  <text x="226" y="328" id="i36" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">ἄλλος</text>
+  <text x="185" y="345" id="i38" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">DET</text>
+  <text x="215" y="345" id="i40" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">det</text>
+  <text x="277" y="328" id="i44" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">ἐϋκνήμιδες</text>
+  <text x="354" y="328" id="i46" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">ἐυκνήμις</text>
+  <text x="277" y="345" id="i48" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">ADJ</text>
+  <text x="304" y="345" id="i50" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">amod</text>
+  <text x="287" y="256" id="i54" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">Ἀχαιοί</text>
+  <text x="333" y="256" id="i56" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">Ἀχαιός</text>
+  <text x="287" y="273" id="i58" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">ADJ</text>
+  <text x="314" y="273" id="i60" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">conj</text>
+  <text x="389" y="256" id="i64" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">,</text>
+  <text x="389" y="273" id="i66" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">PUNCT</text>
+  <text x="438" y="273" id="i68" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">punct</text>
+  <text x="399" y="184" id="i72" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">ὑμῖν</text>
+  <text x="430" y="184" id="i74" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">σύ</text>
+  <text x="399" y="201" id="i76" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">PRON</text>
+  <text x="440" y="201" id="i78" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">iobj</text>
+  <text x="474" y="184" id="i82" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">μὲν</text>
+  <text x="500" y="184" id="i84" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">μέν</text>
+  <text x="474" y="201" id="i86" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">ADV</text>
+  <text x="506" y="201" id="i88" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">advmod</text>
+  <text x="569" y="184" id="i92" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">θεοὶ</text>
+  <text x="600" y="184" id="i94" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">θεός</text>
+  <text x="569" y="201" id="i96" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">NOUN</text>
+  <text x="613" y="201" id="i98" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">nsubj</text>
+  <text x="579" y="112" id="i102" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">δοῖεν</text>
+  <text x="617" y="112" id="i104" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">δίδωμι</text>
+  <text x="579" y="129" id="i106" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">VERB</text>
+  <text x="618" y="129" id="i108" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">root</text>
+  <text x="589" y="400" id="i112" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">Ὀλύμπια</text>
+  <text x="648" y="400" id="i114" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">Ὀλύμπιος</text>
+  <text x="589" y="417" id="i116" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">ADJ</text>
+  <text x="616" y="417" id="i118" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">amod</text>
+  <text x="599" y="328" id="i122" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">δώματ'</text>
+  <text x="651" y="328" id="i124" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">δῶμα</text>
+  <text x="599" y="345" id="i126" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">NOUN</text>
+  <text x="643" y="345" id="i128" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">obj</text>
+  <text x="609" y="256" id="i132" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">ἔχοντες</text>
+  <text x="666" y="256" id="i134" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">ἔχω</text>
+  <text x="609" y="273" id="i136" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">VERB</text>
+  <text x="648" y="273" id="i138" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">amod</text>
+  <text x="658" y="184" id="i142" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">ἐκπέρσαι</text>
+  <text x="721" y="184" id="i144" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">ἐκπέρθω</text>
+  <text x="658" y="201" id="i146" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">VERB</text>
+  <text x="697" y="201" id="i148" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">ccomp</text>
+  <text x="697" y="328" id="i152" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">Πριάμοιο</text>
+  <text x="760" y="328" id="i154" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">Πρίαμος</text>
+  <text x="697" y="345" id="i156" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">PROPN</text>
+  <text x="746" y="345" id="i158" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">nmod</text>
+  <text x="707" y="256" id="i162" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">πόλιν</text>
+  <text x="746" y="256" id="i164" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">πόλις</text>
+  <text x="707" y="273" id="i166" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">NOUN</text>
+  <text x="751" y="273" id="i168" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">obj</text>
+  <text x="825" y="328" id="i172" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">,</text>
+  <text x="825" y="345" id="i174" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">PUNCT</text>
+  <text x="874" y="345" id="i176" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">punct</text>
+  <text x="920" y="328" id="i180" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">εὖ</text>
+  <text x="920" y="345" id="i182" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">ADV</text>
+  <text x="952" y="345" id="i184" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">advmod</text>
+  <text x="1015" y="328" id="i188" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">δ'</text>
+  <text x="1031" y="328" id="i190" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">δέ</text>
+  <text x="1015" y="345" id="i192" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">CCONJ</text>
+  <text x="1061" y="345" id="i194" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">cc</text>
+  <text x="1085" y="328" id="i198" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">οἴκαδ'</text>
+  <text x="1130" y="328" id="i200" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">οἴκαδε</text>
+  <text x="1085" y="345" id="i202" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">ADV</text>
+  <text x="1117" y="345" id="i204" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">obj</text>
+  <text x="1095" y="256" id="i208" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">ἱκέσθαι</text>
+  <text x="1147" y="256" id="i210" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="text text_item seg:0.0">ἱκνέομαι</text>
+  <text x="1095" y="273" id="i212" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">VERB</text>
+  <text x="1134" y="273" id="i214" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">conj</text>
+  <text x="1105" y="184" id="i218" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#000000" width="0" class="text text_item seg:0.0">·</text>
+  <text x="1105" y="201" id="i220" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="text text_item seg:0.0">PUNCT</text>
+  <text x="1154" y="201" id="i222" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#0000ff" width="0" class="text text_item seg:0.0">punct</text>
+  <text x="92" y="184" id="i7" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="80" y="201" id="i11" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="87" y="345" id="i19" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="136" y="328" id="i25" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="157" y="345" id="i29" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="222" y="328" id="i35" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="211" y="345" id="i39" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="350" y="328" id="i45" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="300" y="345" id="i49" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="329" y="256" id="i55" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="310" y="273" id="i59" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="434" y="273" id="i67" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="426" y="184" id="i73" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="436" y="201" id="i77" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="496" y="184" id="i83" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="502" y="201" id="i87" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="596" y="184" id="i93" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="609" y="201" id="i97" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="613" y="112" id="i103" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="614" y="129" id="i107" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="644" y="400" id="i113" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="612" y="417" id="i117" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="647" y="328" id="i123" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="639" y="345" id="i127" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="662" y="256" id="i133" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="644" y="273" id="i137" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="717" y="184" id="i143" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="693" y="201" id="i147" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="756" y="328" id="i153" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="742" y="345" id="i157" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="742" y="256" id="i163" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="747" y="273" id="i167" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="870" y="345" id="i175" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="948" y="345" id="i183" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="1027" y="328" id="i189" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="1057" y="345" id="i193" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="1126" y="328" id="i199" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="1113" y="345" id="i203" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="1143" y="256" id="i209" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#bebebe" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="1130" y="273" id="i213" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+  <text x="1150" y="201" id="i221" text-anchor="start" font-family="DejaVu Sans" font-weight="normal" font-size="13" font-slant="roman" fill="#008b8b" width="0" class="plaintext text_item seg:0.0">.</text>
+ </g>
+</svg>
