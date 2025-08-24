@@ -15,4 +15,6 @@ Other directories:
 
 ## License
 
-Data (including the figures generated with the code) and code are released under a [![CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)license (see the LICENSE file for the full text).
+Data (including the figures generated with the code) and code are released under a [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/legalcode.en) license (see the LICENSE file for the full text).
+
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
