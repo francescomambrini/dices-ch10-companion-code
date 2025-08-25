@@ -1,6 +1,6 @@
 # Companion Code repository for *The (annotated) language of the Homeric Heroes*
 
-This repository contains the code and data used to support my Chapter 10 in the edited volume of the [DICES](https://www.dices.uni-rostock.de/en/about-dices/) network, entitled *Direct speech in Greek and Latin epic: expanding the methods and Canon*.
+This repository contains the code and data used as basis for the analyses in Chapter 10 of the volume entitled *Direct speech in Greek and Latin epic: expanding the methods and Canon*, issued from the work of the [DICES](https://www.dices.uni-rostock.de/en/about-dices/) network.
 
 The title of my chapter is: "The (annotated) language of the Homeric Heroes. Towards a treebank-based approach".
 
